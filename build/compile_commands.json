@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/test.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/test.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/test.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Fiber.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Fiber.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/Fiber.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Scheduler.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Scheduler.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/Scheduler.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/IOManager.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/IOManager.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/IOManager.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Timer.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Timer.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/Timer.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/FdManager.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/FdManager.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/FdManager.cpp"
+},
+{
+  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Hook.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Hook.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/Hook.cpp"
+}
+]
