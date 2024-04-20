@@ -1,3 +1,0 @@
-/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles/test.dir
-/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles/edit_cache.dir
-/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles/rebuild_cache.dir

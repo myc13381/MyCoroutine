@@ -1,1 +1,0 @@
-/usr/bin/g++ -g -rdynamic CMakeFiles/test.dir/server.cpp.o CMakeFiles/test.dir/Fiber.cpp.o CMakeFiles/test.dir/Scheduler.cpp.o CMakeFiles/test.dir/IOManager.cpp.o CMakeFiles/test.dir/Timer.cpp.o -o test 
