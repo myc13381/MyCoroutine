@@ -108,6 +108,7 @@ void IOManager::contextResize(size_t size)
     }
 }
 
+// 如果cb为空，则以当前协程为cb
 int IOManager::addEvent(int fd, Event event, std::function<void()> cb)
 {
     // 找到fd对应的FdContexts，如果不存在就分配一个 --> fdContexts 扩容
@@ -337,27 +338,27 @@ void IOManager::idle()
 
         // 阻塞在epoll_wait上，等待事件发生或者定时器超时
          int rt = 0;
-        // do 
-        // {
-        //     //std::cout<<"epoll_wait...\n";
-        //     // 默认超时5秒，如果下一个定时器的超时时间大于5秒，仍以5秒来计算超时
-        //     // 避免定时器超时时间太大时，epoll_wait一直阻塞
-        //     static const int MAX_TIMEOUT = 5000; // 5 seconds
-        //     auto temp = std::chrono::milliseconds(~0ull);
-        //     if(next_timeout != std::chrono::milliseconds(~0ull))
-        //     {
-        //         next_timeout = std::min(next_timeout, std::chrono::milliseconds(MAX_TIMEOUT));
-        //     }
-        //     else next_timeout = std::chrono::milliseconds(MAX_TIMEOUT); // 没有事件，也等待5秒
+        do 
+        {
+            //std::cout<<"epoll_wait...\n";
+            // 默认超时5秒，如果下一个定时器的超时时间大于5秒，仍以5秒来计算超时
+            // 避免定时器超时时间太大时，epoll_wait一直阻塞
+            static const int MAX_TIMEOUT = 5000; // 5 seconds
+            auto temp = std::chrono::milliseconds(~0ull);
+            if(next_timeout != std::chrono::milliseconds(~0ull))
+            {
+                next_timeout = std::min(next_timeout, std::chrono::milliseconds(MAX_TIMEOUT));
+            }
+            else next_timeout = std::chrono::milliseconds(MAX_TIMEOUT); // 没有事件，也等待5秒
 
-        //     // 调用epoll_wait
-        //     int rt = epoll_wait(m_epfd, events, MAX_EVENTS, static_cast<int>(next_timeout.count()/1000)); // 单位秒
-        //     if(rt < 0 && errno == EINTR)
-        //     { // 如果遇到中断，继续处理
-        //         continue;
-        //     }
-        //     else break; // 读取完毕
-        // }while(true);
+            // 调用epoll_wait
+            int rt = epoll_wait(m_epfd, events, MAX_EVENTS, static_cast<int>(next_timeout.count()/1000)); // 单位秒
+            if(rt < 0 && errno == EINTR)
+            { // 如果遇到中断，继续处理
+                continue;
+            }
+            else break; // 读取完毕
+        }while(true);
 
         // 处理定时器的操作
         // 收集所有已经超时的定时器，执行回调函数

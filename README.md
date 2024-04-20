@@ -528,3 +528,92 @@ void onTimerInsertedAtFront() override;
 
 ## Hook
 
+### 什么是hook，为什么需要hook
+
+hook是对系统调用API进行一次封装，将其封装成为一个与原始系统调用同名的接口。这样调用接口时会先执行一些隐藏的操作，再执行原始的系统调用。
+
+协程的优势在于发生阻塞时可以随时切换，提高处理机资源的利用率，而且协程间切换。因此为了能够使体现的协程库真正体现价值，就需要让其能够实现这一阻塞切换的功能，其中hook就是一种解决方案。
+
+### 如何进行hook
+
+在进行网络编程时，常见的阻塞场景是socket IO相关接口例如read，write等，还有就是用户主动调用sleep相关接口进行睡眠。
+
+**基本思路**：针对socket IO，为了实现非阻塞的使用，需要将socket fd设置为非阻塞，通过对应返回值已经errno确定调用失败的原因，如果是阻塞，则考虑将该协程yield，等到资源可用时再返回继续执行刚刚yield的协程。针对sleep的hook也差不多，不过主要依靠定时器来实现，当某一协程sleep时，设置一个定时器用来在sleep醒来的时机触发，然后协程yield。
+
+**socket IO**
+
+hook的重点是在API底层实现的同时完全模拟其原本的行为，而不让调用方知道，因此处理socket IO相关函数，对于fcntl，iocntl，setsockopt,getsockopt函数也需要hook。
+
+**FdCtx**和**FdManager**
+
+为了方便管理socked fd，即管理fd阻塞超时状态等，我们设计FdCtx类用于记录
+
+```cpp
+private:
+    bool m_isInit       : 1;                    // 是否初始化
+    bool m_isSocket     : 1;                    // 是否为socket
+    bool m_sysNoBlock   : 1;                    // 是否hook非阻塞
+    bool m_userNoBlock  : 1;                    // 是否用户设置非阻塞
+    bool m_isClosed     : 1;                    // 是否关闭
+    int m_fd;                                   // 文件句柄
+    std::chrono::milliseconds m_recvTimeout;    // 读超时时间毫秒
+    std::chrono::milliseconds m_sendTimeout;    // 写超时时间毫秒
+```
+
+同时一系列接口用于获取和设置这些成员变量的值。
+
+每一个fd会有自己的FdCtx，但是为了管理FdCtx，需要一个管理类，这就是FdManager，其设计比较简单，主要就是通过一个数组维护FdCtx的指针，同时FdManager被设计为单例对象。
+
+```cpp
+// 文件句柄管理类
+class FdManager
+{
+public:
+    typedef std::shared_mutex RWMutex; // 读写锁
+    typedef std::unique_lock<std::shared_mutex> WriteLock;
+    typedef std::shared_lock<std::shared_mutex> ReadLock;
+    // 无参构造函数
+    FdManager();
+    // 获取创建文件句柄类FdCtx::ptr
+    FdCtx::ptr get(int fd, bool auto_create = false);
+    // 删除文件句柄类
+    void del(int fd);
+private:
+    RWMutex m_mutex;                    // 读写锁
+    std::vector<FdCtx::ptr> m_datas;    // 文件句柄集合
+};
+// 文件句柄管理类单例对象
+typedef Singleton<FdManager> FdMgr;
+```
+
+### hook的具体实现
+
+使用线程局部变量用来控制每一个线程是否启用hook，将hook控制的粒度缩小到线程级别。
+
+```cpp
+static thread_local bool t_hook_enable = false; // 每一个线程是否开启hook
+```
+
+sleep
+
+由于协程工作在线程之上，如果一个协程调用sleep，将导致整个线程睡眠进而无法触发其他协程，这样显然是不合理的。因此我们需要实现对一个协程的sleep功能。这里可以使用定时器，当我们调用sleep时，设置一个睡眠结束时间超时的定时器然后协程yield，这样就可以达到睡眠的效果。并且使用定时器也不会阻塞线程。
+
+write/read/send/recv ....
+
+这些是socket IO函数。hook这些接口的思路是首先判断fd是不是非阻塞，的如果用户自己设置了非阻塞，那么直接执行原来的系统调用即可(因为用户自己设置非阻塞代表用户自己编写了相关代码来处理非阻塞情况)。如果用户没有设置非阻塞，并且该线程也确实开起了hook功能，那么将执行hook操作。对于这些IO接口，其底层处理相似，因此我们实现`do_io`函数来复用这些处理。
+
+```cpp
+template <typename OriginFun, typename... Args>
+static ssize_t do_io(int fd, OriginFun fun, const char *hook_fun_name, uint32_t event, int timeout_so, Args &&... args);
+// 一、不启用hook或者FdManager获取对应FdCtx失败，直接执行原来的系统函数，返回
+// 二、此时fd已经被FdManager设置为非阻塞了，因此进行非阻塞的系统调用，调用成功直接返回
+// 三、系统调用返回失败并且errno == EAGAIN，表示资源暂时不可用，这种情况需要过段时间重试，其他情况直接返回错误即可
+// 四、接下来判断是否传入了有效的超时时间，如果有效，则设置一个条件超时定时器，内部表示超时时间时触发一次event事件
+// 五、添加event类型事件，回调函数是当前协程
+// 六、yield 让出执行权
+// 七、再次被调度，这里有两种情况一是超时触发，而是epoll检测可读/写，如果是因为超时触发，则函数直接返回-1，如果是可读/写触发，则回到二执行
+```
+
+
+
+使用extern "C" 和 dlsym 进行hook

@@ -110,7 +110,7 @@ retry:
     {
         n = fun(fd, std::forward<Args>(args)...);
     }
-    while(n == -1  && errno == EINTR);
+    while(n == -1  && errno == EINTR); // 如果因为中断停止，继续尝试
 
     if(n == -1 && errno == EAGAIN)
     { // EAGAIN表示资源暂时不可用，因此此时会阻塞
@@ -127,11 +127,11 @@ retry:
                     return;
                 }
                 t->cancelled = ETIMEDOUT;
-                iom->cancelEvent(fd, static_cast<IOManager::Event>(event));
+                iom->cancelEvent(fd, static_cast<IOManager::Event>(event)); // 触发事件让此协程继续
             }, winfo);
         }
-
-        int rt = iom->addEvent(fd, static_cast<IOManager::Event>(event));
+        // idle 协程会删除已经触发的事件
+        int rt = iom->addEvent(fd, static_cast<IOManager::Event>(event)); // cb为空表示传入当前协程
         if(rt == -1)
         { // 添加失败
             if(timer) timer->cancel();
@@ -140,8 +140,9 @@ retry:
         else // rt == 0
         { // 添加成功
             Fiber::GetThis()->yield();
+            // 协程继续执行有两种情况，一是超时触发，而是epoll检测可读/写
             if(timer) timer->cancel();
-            if(!tinfo->cancelled)
+            if(tinfo->cancelled)
             {
                 errno = tinfo->cancelled;
                 return -1;
@@ -193,12 +194,13 @@ int connect_with_timeout(int fd, const struct sockaddr *addr, socklen_t addrlen,
         return ret;
     }
     FdCtx::ptr ctx = FdMgr::GetInstance()->get(fd);
-    int flags = fcntl_f(fd, F_GETFL, 0);
-    if((flags & O_NONBLOCK))
-        {   // 内部设置为非阻塞
-            fcntl_f(fd, F_SETFL, flags & ~O_NONBLOCK);
-        }
-    ctx->setSysNoBlock(false);
+
+    // int flags = fcntl_f(fd, F_GETFL, 0);
+    // if((flags & O_NONBLOCK))
+    //     {   // 内部设置为非阻塞
+    //         fcntl_f(fd, F_SETFL, flags & ~O_NONBLOCK);
+    //     }
+    // ctx->setSysNoBlock(false);
 
     if(!ctx || ctx->isClose())
     {
@@ -214,12 +216,12 @@ int connect_with_timeout(int fd, const struct sockaddr *addr, socklen_t addrlen,
     int n = connect_f(fd, addr, addrlen);
     if(n == 0) 
     {
-        int flags = fcntl_f(fd, F_GETFL, 0);
-        if(!(flags & O_NONBLOCK))
-        {   // 内部设置为非阻塞
-            fcntl_f(fd, F_SETFL, flags | O_NONBLOCK);
-        }
-        ctx->setSysNoBlock(true);
+        // int flags = fcntl_f(fd, F_GETFL, 0);
+        // if(!(flags & O_NONBLOCK))
+        // {   // 内部设置为非阻塞
+        //     fcntl_f(fd, F_SETFL, flags | O_NONBLOCK);
+        // }
+        // ctx->setSysNoBlock(true);
         return 0;
     }
     else if(n != -1 || errno != EINPROGRESS) return n; // EINPROGRESS 是一个特定的错误码，表示连接操作正在进行中

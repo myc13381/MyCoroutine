@@ -1,8 +1,8 @@
 [
 {
   "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/test.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/test.cpp",
-  "file": "/home/myc/Desktop/project/TinyCoroutine/test.cpp"
+  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/server.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/server.cpp",
+  "file": "/home/myc/Desktop/project/TinyCoroutine/server.cpp"
 },
 {
   "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
@@ -23,15 +23,5 @@
   "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Timer.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Timer.cpp",
   "file": "/home/myc/Desktop/project/TinyCoroutine/Timer.cpp"
-},
-{
-  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/FdManager.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/FdManager.cpp",
-  "file": "/home/myc/Desktop/project/TinyCoroutine/FdManager.cpp"
-},
-{
-  "directory": "/home/myc/Desktop/project/TinyCoroutine/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/test.dir/Hook.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Hook.cpp",
-  "file": "/home/myc/Desktop/project/TinyCoroutine/Hook.cpp"
 }
 ]

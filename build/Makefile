@@ -129,30 +129,6 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
-FdManager.o: FdManager.cpp.o
-.PHONY : FdManager.o
-
-# target to build an object file
-FdManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/FdManager.cpp.o
-.PHONY : FdManager.cpp.o
-
-FdManager.i: FdManager.cpp.i
-.PHONY : FdManager.i
-
-# target to preprocess a source file
-FdManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/FdManager.cpp.i
-.PHONY : FdManager.cpp.i
-
-FdManager.s: FdManager.cpp.s
-.PHONY : FdManager.s
-
-# target to generate assembly for a file
-FdManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/FdManager.cpp.s
-.PHONY : FdManager.cpp.s
-
 Fiber.o: Fiber.cpp.o
 .PHONY : Fiber.o
 
@@ -176,30 +152,6 @@ Fiber.s: Fiber.cpp.s
 Fiber.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Fiber.cpp.s
 .PHONY : Fiber.cpp.s
-
-Hook.o: Hook.cpp.o
-.PHONY : Hook.o
-
-# target to build an object file
-Hook.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Hook.cpp.o
-.PHONY : Hook.cpp.o
-
-Hook.i: Hook.cpp.i
-.PHONY : Hook.i
-
-# target to preprocess a source file
-Hook.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Hook.cpp.i
-.PHONY : Hook.cpp.i
-
-Hook.s: Hook.cpp.s
-.PHONY : Hook.s
-
-# target to generate assembly for a file
-Hook.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Hook.cpp.s
-.PHONY : Hook.cpp.s
 
 IOManager.o: IOManager.cpp.o
 .PHONY : IOManager.o
@@ -273,29 +225,29 @@ Timer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Timer.cpp.s
 .PHONY : Timer.cpp.s
 
-test.o: test.cpp.o
-.PHONY : test.o
+server.o: server.cpp.o
+.PHONY : server.o
 
 # target to build an object file
-test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
-.PHONY : test.cpp.o
+server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/server.cpp.o
+.PHONY : server.cpp.o
 
-test.i: test.cpp.i
-.PHONY : test.i
+server.i: server.cpp.i
+.PHONY : server.i
 
 # target to preprocess a source file
-test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
-.PHONY : test.cpp.i
+server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/server.cpp.i
+.PHONY : server.cpp.i
 
-test.s: test.cpp.s
-.PHONY : test.s
+server.s: server.cpp.s
+.PHONY : server.s
 
 # target to generate assembly for a file
-test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
-.PHONY : test.cpp.s
+server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/server.cpp.s
+.PHONY : server.cpp.s
 
 # Help Target
 help:
@@ -306,15 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... FdManager.o"
-	@echo "... FdManager.i"
-	@echo "... FdManager.s"
 	@echo "... Fiber.o"
 	@echo "... Fiber.i"
 	@echo "... Fiber.s"
-	@echo "... Hook.o"
-	@echo "... Hook.i"
-	@echo "... Hook.s"
 	@echo "... IOManager.o"
 	@echo "... IOManager.i"
 	@echo "... IOManager.s"
@@ -324,9 +270,9 @@ help:
 	@echo "... Timer.o"
 	@echo "... Timer.i"
 	@echo "... Timer.s"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 

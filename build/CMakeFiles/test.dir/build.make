@@ -69,19 +69,19 @@ include CMakeFiles/test.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test.dir/flags.make
 
-CMakeFiles/test.dir/test.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/test.cpp.o: ../test.cpp
-CMakeFiles/test.dir/test.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/test.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/test.cpp.o -MF CMakeFiles/test.dir/test.cpp.o.d -o CMakeFiles/test.dir/test.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/test.cpp
+CMakeFiles/test.dir/server.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/server.cpp.o: ../server.cpp
+CMakeFiles/test.dir/server.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/server.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/server.cpp.o -MF CMakeFiles/test.dir/server.cpp.o.d -o CMakeFiles/test.dir/server.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/server.cpp
 
-CMakeFiles/test.dir/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/test.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myc/Desktop/project/TinyCoroutine/test.cpp > CMakeFiles/test.dir/test.cpp.i
+CMakeFiles/test.dir/server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/server.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myc/Desktop/project/TinyCoroutine/server.cpp > CMakeFiles/test.dir/server.cpp.i
 
-CMakeFiles/test.dir/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/test.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myc/Desktop/project/TinyCoroutine/test.cpp -o CMakeFiles/test.dir/test.cpp.s
+CMakeFiles/test.dir/server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/server.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myc/Desktop/project/TinyCoroutine/server.cpp -o CMakeFiles/test.dir/server.cpp.s
 
 CMakeFiles/test.dir/Fiber.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/Fiber.cpp.o: ../Fiber.cpp
@@ -139,57 +139,25 @@ CMakeFiles/test.dir/Timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Timer.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myc/Desktop/project/TinyCoroutine/Timer.cpp -o CMakeFiles/test.dir/Timer.cpp.s
 
-CMakeFiles/test.dir/FdManager.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/FdManager.cpp.o: ../FdManager.cpp
-CMakeFiles/test.dir/FdManager.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test.dir/FdManager.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/FdManager.cpp.o -MF CMakeFiles/test.dir/FdManager.cpp.o.d -o CMakeFiles/test.dir/FdManager.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/FdManager.cpp
-
-CMakeFiles/test.dir/FdManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/FdManager.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myc/Desktop/project/TinyCoroutine/FdManager.cpp > CMakeFiles/test.dir/FdManager.cpp.i
-
-CMakeFiles/test.dir/FdManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/FdManager.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myc/Desktop/project/TinyCoroutine/FdManager.cpp -o CMakeFiles/test.dir/FdManager.cpp.s
-
-CMakeFiles/test.dir/Hook.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Hook.cpp.o: ../Hook.cpp
-CMakeFiles/test.dir/Hook.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test.dir/Hook.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/Hook.cpp.o -MF CMakeFiles/test.dir/Hook.cpp.o.d -o CMakeFiles/test.dir/Hook.cpp.o -c /home/myc/Desktop/project/TinyCoroutine/Hook.cpp
-
-CMakeFiles/test.dir/Hook.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Hook.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/myc/Desktop/project/TinyCoroutine/Hook.cpp > CMakeFiles/test.dir/Hook.cpp.i
-
-CMakeFiles/test.dir/Hook.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Hook.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/myc/Desktop/project/TinyCoroutine/Hook.cpp -o CMakeFiles/test.dir/Hook.cpp.s
-
 # Object files for target test
 test_OBJECTS = \
-"CMakeFiles/test.dir/test.cpp.o" \
+"CMakeFiles/test.dir/server.cpp.o" \
 "CMakeFiles/test.dir/Fiber.cpp.o" \
 "CMakeFiles/test.dir/Scheduler.cpp.o" \
 "CMakeFiles/test.dir/IOManager.cpp.o" \
-"CMakeFiles/test.dir/Timer.cpp.o" \
-"CMakeFiles/test.dir/FdManager.cpp.o" \
-"CMakeFiles/test.dir/Hook.cpp.o"
+"CMakeFiles/test.dir/Timer.cpp.o"
 
 # External object files for target test
 test_EXTERNAL_OBJECTS =
 
-test: CMakeFiles/test.dir/test.cpp.o
+test: CMakeFiles/test.dir/server.cpp.o
 test: CMakeFiles/test.dir/Fiber.cpp.o
 test: CMakeFiles/test.dir/Scheduler.cpp.o
 test: CMakeFiles/test.dir/IOManager.cpp.o
 test: CMakeFiles/test.dir/Timer.cpp.o
-test: CMakeFiles/test.dir/FdManager.cpp.o
-test: CMakeFiles/test.dir/Hook.cpp.o
 test: CMakeFiles/test.dir/build.make
 test: CMakeFiles/test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/myc/Desktop/project/TinyCoroutine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
