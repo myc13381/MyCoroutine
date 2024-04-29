@@ -617,3 +617,22 @@ static ssize_t do_io(int fd, OriginFun fun, const char *hook_fun_name, uint32_t 
 
 
 使用extern "C" 和 dlsym 进行hook
+
+```cpp
+name_f = (name_fun)dlsym(RTLD_NEXT, #name);
+```
+
+将hooking系统函数name，获取其地址并赋值给对应函数类型指针，然后重新实现同名的系统函数，内部添加一些操作后再调用底层原来的函数，最后返回。
+
+
+
+
+
+参考资料
+
+协程的好处有哪些？ - 腾讯技术工程的回答 - 知乎
+https://www.zhihu.com/question/20511233/answer/2743607300 
+
+[ucontext_t库原理](https://blog.csdn.net/qq_44443986/article/details/117739157)
+
+[epoll底层](https://mp.weixin.qq.com/s/OmRdUgO1guMX76EdZn11UQ)

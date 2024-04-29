@@ -299,29 +299,28 @@ void test_io()
 {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     assert(sockfd > 0);
-    fcntl(sockfd, F_SETFL, O_NONBLOCK); // 非阻塞socket
     sockaddr_in servaddr;
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(9000);
-
+    fcntl(sockfd, F_SETFL, O_NONBLOCK); // 非阻塞socket
     int rt = connect(sockfd, (const sockaddr*)&servaddr, sizeof(servaddr));
     if(rt != 0) 
     {
-        if(errno == EINPROGRESS) {
+        if(errno == EINPROGRESS) { // EINPROGRESS 代表连接正在进行中
             std::cout << "EINPROGRESS"<<std::endl;
             // 注册写事件回调，只用于判断connect是否成功
-            // 非阻塞的TCP套接字connect一般无法立即建立连接，要通过套接字可写来判断connect是否已经成功
+            // 非阻塞的TCP套接字connect一般无法立即建立连接，可以通过select/poll/epoll来监听sockfd，当其有反应时就处理
+            // 下面使用的封装了epoll的事件处理进行监视
             IOManager::GetThis()->addEvent(sockfd, IOManager::WRITE, do_io_write);
-            // 注册读事件回调，注意事件是一次性的
             IOManager::GetThis()->addEvent(sockfd, IOManager::READ, do_io_read);
         } else {
             std::cout << "connect error, errno:" << errno << ", errstr:" << strerror(errno)<<std::endl;
         }
     } 
     else
-    {
+    { // rt == 0 || erron ！= EINPROGRESS,表示连接已经失败了
         std::cout << "else, errno:" << errno << ", errstr:" << strerror(errno)<<std::endl;
     }
 }
